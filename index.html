@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Athlete Nutrition & Recovery Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #053242;
+  --navy2:  #07455a;
+  --teal:   #1D9E75;
+  --teal-l: #e1f5ee;
+  --blue:   #378ADD;
+  --blue-l: #e6f1fb;
+  --purple: #7F77DD;
+  --purple-l: #eeedfe;
+  --amber:  #EF9F27;
+  --amber-l: #faeeda;
+  --red:    #E24B4A;
+  --red-l:  #fcebeb;
+  --card:   #0a4a5e;
+  --card2:  #083d50;
+  --text:   #e8f4f8;
+  --text-s: #8bbccc;
+  --border: #1a5f78;
+  --white:  #ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--navy);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(5,50,66,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--teal);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--teal);
+  white-space: nowrap;
+  margin-right: 1rem;
+  padding: 0.75rem 0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+nav a {
+  color: var(--text-s);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.85rem 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.2s;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+}
+nav a:hover { color: var(--white); border-bottom-color: var(--teal); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #07455a 0%, #053242 50%, #031e2a 100%);
+  padding: 4rem 1.5rem 3rem;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 70% 50%, rgba(29,158,117,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 80% at 10% 80%, rgba(55,138,221,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1100px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.0;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin-bottom: 1.2rem;
+}
+.hero h1 span { color: var(--teal); }
+.hero-sub {
+  font-size: 1.05rem;
+  color: var(--text-s);
+  margin-bottom: 2rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+.hero-badges {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.2rem;
+}
+.badge {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.9rem;
+  border-radius: 4px;
+  background: var(--purple);
+  color: var(--white);
+}
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.6rem;
+}
+.kpi {
+  background: var(--card);
+  border-radius: 8px;
+  padding: 0.8rem 0.5rem;
+  text-align: center;
+  border-top: 3px solid var(--teal);
+}
+.kpi-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--white);
+  line-height: 1.1;
+}
+.kpi-lbl {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-top: 0.2rem;
+}
+.hero-img-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-img-circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: var(--teal);
+  border: 3px solid rgba(255,255,255,0.25);
+  box-shadow: 0 0 80px rgba(29,158,117,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.hero-img-circle img {
+  width: 92%;
+  height: 92%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: contrast(1.1);
+}
+
+/* ── SECTIONS ── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+section {
+  padding: 4rem 0;
+  border-top: 1px solid var(--border);
+}
+section:first-of-type { border-top: none; }
+
+.sec-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.sec-bar {
+  width: 5px;
+  height: 2.2rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.sec-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--white);
+}
+.sec-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-s);
+  margin: 1.4rem 0 0.6rem;
+}
+p { color: var(--text-s); margin-bottom: 0.9rem; }
+p b { color: var(--text); }
+
+/* ── CALLOUTS ── */
+.callout {
+  border-left: 4px solid;
+  border-radius: 0 8px 8px 0;
+  padding: 0.9rem 1.2rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.callout b { display: block; margin-bottom: 0.25rem; font-size: 0.9rem; letter-spacing: 0.04em; }
+.callout.teal   { border-color: var(--teal);   background: rgba(29,158,117,0.1);  color: #a8e8cf; }
+.callout.teal b { color: var(--teal); }
+.callout.blue   { border-color: var(--blue);   background: rgba(55,138,221,0.1);  color: #aad3f5; }
+.callout.blue b { color: var(--blue); }
+.callout.amber  { border-color: var(--amber);  background: rgba(239,159,39,0.1);  color: #f5d49a; }
+.callout.amber b { color: var(--amber); }
+.callout.purple { border-color: var(--purple); background: rgba(127,119,221,0.12); color: #c5c1f5; }
+.callout.purple b { color: var(--purple); }
+.callout.red    { border-color: var(--red);    background: rgba(226,75,74,0.1);   color: #f5b0af; }
+.callout.red b  { color: var(--red); }
+
+/* ── TABLES ── */
+.tbl-wrap { overflow-x: auto; margin: 1rem 0; border-radius: 10px; border: 1px solid var(--border); }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+thead th {
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+tbody tr:nth-child(odd)  { background: var(--card2); }
+tbody tr:nth-child(even) { background: var(--card); }
+tbody tr:hover { background: rgba(29,158,117,0.12); }
+tbody td {
+  padding: 0.7rem 0.9rem;
+  color: var(--text-s);
+  vertical-align: top;
+  border-top: 1px solid var(--border);
+  line-height: 1.55;
+}
+tbody td:first-child { color: var(--text); font-weight: 600; }
+
+/* ── GRID CARDS ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+.grid3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin: 1rem 0; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem;
+}
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.card-meta {
+  font-size: 0.78rem;
+  color: var(--teal);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.04em;
+}
+.card p { font-size: 0.88rem; margin-bottom: 0; }
+
+/* ── MEAL PLAN CARDS ── */
+.meal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.meal-card {
+  background: var(--card2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid var(--teal);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.meal-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.meal-time { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.2rem; }
+.meal-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--white); text-transform: uppercase; margin-bottom: 0.3rem; }
+.meal-stats { font-size: 0.75rem; color: var(--amber); font-weight: 600; margin-bottom: 0.5rem; letter-spacing: 0.04em; }
+.meal-body { font-size: 0.87rem; color: var(--text-s); line-height: 1.6; }
+.meal-card.night { border-left-color: var(--purple); }
+.meal-card.night .meal-time { color: var(--purple); }
+
+/* ── HYDRATION BARS ── */
+.hyd-bars { margin: 1rem 0; }
+.hyd-row { margin-bottom: 1rem; }
+.hyd-label { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 600; color: var(--text); margin-bottom: 0.35rem; }
+.hyd-track { background: var(--card2); border-radius: 6px; height: 14px; overflow: hidden; }
+.hyd-fill { height: 100%; border-radius: 6px; }
+
+/* ── SLEEP PHASES ── */
+.sleep-strip {
+  display: flex;
+  height: 52px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  border: 1px solid var(--border);
+}
+.sleep-phase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+  padding: 0 0.5rem;
+}
+.sleep-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.6rem; }
+.sleep-leg { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-s); }
+.sleep-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+/* ── SUPP ROWS ── */
+.supp-list { margin: 1rem 0; }
+.supp-row {
+  display: grid;
+  grid-template-columns: 180px 130px 1fr;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.supp-row:first-child { border-top: 1px solid var(--border); border-radius: 10px 10px 0 0; background: var(--navy2); }
+.supp-row:nth-child(odd)  { background: var(--card2); }
+.supp-row:nth-child(even) { background: var(--card); }
+.supp-name { font-weight: 700; color: var(--white); font-size: 0.92rem; }
+.supp-dose { font-size: 0.82rem; color: var(--blue); font-weight: 600; }
+.supp-when { font-size: 0.82rem; color: var(--amber); }
+.supp-why  { font-size: 0.85rem; color: var(--text-s); line-height: 1.55; grid-column: 1 / -1; padding-top: 0.2rem; }
+
+/* ── BULLETS ── */
+ul.bullets { list-style: none; padding: 0; margin: 0.5rem 0 1rem; }
+ul.bullets li {
+  padding: 0.35rem 0 0.35rem 1.4rem;
+  position: relative;
+  color: var(--text-s);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+ul.bullets li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--teal);
+  font-size: 0.8rem;
+}
+
+/* ── APPETITE TABLE ── */
+.apt-grid { margin: 1rem 0; }
+
+/* ── FOOTER ── */
+footer {
+  background: #021e2a;
+  border-top: 2px solid var(--teal);
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-s);
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+}
+footer strong { color: var(--teal); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero-img-wrap { display: none; }
+  .kpi-grid { grid-template-columns: repeat(3,1fr); }
+  .meal-grid { grid-template-columns: 1fr; }
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+  .supp-row { grid-template-columns: 1fr 1fr; }
+  .supp-why { grid-column: 1 / -1; }
+  .hero-badges { justify-content: center; }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow { animation: fadeUp 0.5s ease both; }
+.hero h1      { animation: fadeUp 0.5s 0.1s ease both; }
+.hero-sub     { animation: fadeUp 0.5s 0.2s ease both; }
+.hero-badges  { animation: fadeUp 0.5s 0.3s ease both; }
+.kpi-grid     { animation: fadeUp 0.5s 0.4s ease both; }
+.hero-img-wrap { animation: fadeUp 0.6s 0.2s ease both; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Athlete Nutrition</div>
+  <a href="#overview">Overview</a>
+  <a href="#meal-plan">Meal Plan</a>
+  <a href="#breakfast">Breakfast</a>
+  <a href="#lunch">Lunch</a>
+  <a href="#dinner">Dinner</a>
+  <a href="#snacks">Snacks</a>
+  <a href="#foods">Foods</a>
+  <a href="#hydration">Hydration</a>
+  <a href="#sleep">Sleep</a>
+  <a href="#supplements">Supplements</a>
+  <a href="#camp">Camp Guide</a>
+  <a href="#appetite">Appetite</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Performance Nutrition Guide</div>
+      <h1>Athlete Nutrition<br>&amp; <span>Recovery</span> Plan</h1>
+      <p class="hero-sub">Personalized for a 15-year-old multi-sport athlete — 6'3&quot;, 200 lbs, carrying one of the highest training loads in high school athletics.</p>
+      <div class="hero-badges">
+        <span class="badge">Wrestling</span>
+        <span class="badge">Cross Country</span>
+        <span class="badge">Strength Training</span>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi-val">4,100</div><div class="kpi-lbl">Cal/Day</div></div>
+        <div class="kpi"><div class="kpi-val">210–250g</div><div class="kpi-lbl">Protein</div></div>
+        <div class="kpi"><div class="kpi-val">545g</div><div class="kpi-lbl">Carbs</div></div>
+        <div class="kpi"><div class="kpi-val">105g</div><div class="kpi-lbl">Fat</div></div>
+        <div class="kpi"><div class="kpi-val">9–10hrs</div><div class="kpi-lbl">Sleep</div></div>
+      </div>
+    </div>
+    <div class="hero-img-wrap">
+      <div class="hero-img-circle">
+        <img src="data:image/png;base64,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" alt="Wrestling athlete">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--teal)"></div><h2 class="sec-title">Overview &amp; Daily Targets</h2></div>
+    <p>This plan is built around one athlete: 15 years old, 6'3&quot;, 200 lbs, wrestling 5 days a week, starting cross country, and running a 6-day strength, power, and explosiveness lifting program. That is one of the highest training loads a high school athlete can carry. Nutrition, hydration, and sleep are not optional support — they <b>ARE</b> the performance plan. Without them, training breaks the body down faster than it can rebuild.</p>
+
+    <div class="sec-sub">Why every macronutrient matters</div>
+    <p><b>Protein</b> is the building block of every muscle fiber repaired after wrestling, lifting, or running. At his size and training volume, 1–1.25g per pound of bodyweight is the minimum. Falling short means the body begins cannibalizing muscle for fuel — the opposite of what he is training for. At 200 lbs, that means 200–250g daily, spread across every meal.</p>
+    <p><b>Carbohydrates</b> are the primary fuel for all three sports. Wrestling and cross country are both heavily carb-dependent, high-intensity activities. Lifting for power and explosiveness is almost entirely anaerobic — it runs on glycogen derived from carbs. Without enough carbs, performance drops, reaction time slows, and injury risk climbs. Cutting carbs to make weight is the wrong move.</p>
+    <p><b>Fat</b> is essential for hormone production — including testosterone, which drives muscle growth. Healthy fats also reduce inflammation in joints and connective tissue, critical at his training volume. At 15, he is still developing. Chronically low fat intake disrupts hormonal development and can affect height and bone density.</p>
+    <div class="callout teal"><b>The bottom line:</b> He needs all three macronutrients in significant quantities every single day. This is not the time to restrict any of them.</div>
+    <div class="callout blue"><b>On appetite and eating this much:</b> It is completely normal to not feel hungry at times — especially after hard sessions. His stomach will need to be trained to handle this volume, and that takes 3–6 weeks. Start where he is comfortable and build up. On low-appetite days, lean on liquid calories and calorie-dense foods. See the full explanation at the bottom of this guide.</div>
+  </div>
+</section>
+
+<!-- FULL MEAL PLAN -->
+<section id="meal-plan">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--blue)"></div><h2 class="sec-title">Full Daily Meal Plan</h2></div>
+    <p>Seven eating occasions spread across the day keep protein synthesis running continuously and prevent him from ever training in a depleted state. Muscle protein synthesis peaks within 2 hours of consuming protein and then declines. Spreading protein across 6–7 meals keeps this process running almost continuously. Skipping meals at his activity level is equivalent to skipping recovery.</p>
+    <div class="meal-grid">
+      <div class="meal-card">
+        <div class="meal-time">7:00 AM</div>
+        <div class="meal-name">Breakfast</div>
+        <div class="meal-stats">~700 kcal &middot; ~48g protein &middot; ~82g carbs</div>
+        <div class="meal-body">Shrimp (8 oz) + rice, cucumbers, Kirkland protein milk, creatine 5g, apple or applesauce</div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">10:00 AM</div>
+        <div class="meal-name">Mid-Morning Snack</div>
+        <div class="meal-stats">~420 kcal &middot; ~20g protein &middot; ~55g carbs</div>
+        <div class="meal-body">Fairlife shake, Cheez-Its, granola bar, grapes or apple slices, pistachios</div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">12:00 PM</div>
+        <div class="meal-name">Lunch</div>
+        <div class="meal-stats">~950 kcal &middot; ~62g protein &middot; ~118g carbs</div>
+        <div class="meal-body">Rice bowl, wrap, or lunch meat plate — see lunch rotation. Kirkland milk. Grapes, cucumbers, or applesauce on the side.</div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">3:30 PM</div>
+        <div class="meal-name">Pre/Post-Workout</div>
+        <div class="meal-stats">~480 kcal &middot; ~42g protein &middot; ~58g carbs</div>
+        <div class="meal-body">Collagen + OJ 30–60 min pre. Fairlife shake. Cheez-Its or granola bar. Grapes or applesauce. Pistachios.</div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">6:30 PM</div>
+        <div class="meal-name">Dinner</div>
+        <div class="meal-stats">~1,050 kcal &middot; ~65g protein &middot; ~132g carbs</div>
+        <div class="meal-body">Chipotle chicken, steak, shrimp, or ground beef + pasta or rice, roasted potatoes, avocado, Kirkland milk</div>
+      </div>
+      <div class="meal-card">
+        <div class="meal-time">8:30 PM</div>
+        <div class="meal-name">Evening Snack</div>
+        <div class="meal-stats">~400 kcal &middot; ~18g protein &middot; ~48g carbs</div>
+        <div class="meal-body">Ice cream (2 scoops) + cottage cheese alongside; or cereal + Kirkland milk; or apple + PB + honey</div>
+      </div>
+      <div class="meal-card night" style="grid-column: 1 / -1;">
+        <div class="meal-time">10:00 PM</div>
+        <div class="meal-name">Nighttime Protein Shake</div>
+        <div class="meal-stats">~280 kcal &middot; ~51g protein &middot; ~10g carbs</div>
+        <div class="meal-body">Ghost protein (1 scoop) mixed in 16 oz Kirkland milk = ~51g protein. On brutal days: add 1 cup cottage cheese alongside for extra casein.</div>
+      </div>
+    </div>
+    <div class="callout teal"><b>Nighttime shake — the single best addition:</b> Ghost + Kirkland milk = ~51g protein in one glass before bed. Sleep is when muscle repair peaks. Going to bed without protein leaves the body with nothing to work with for 8–10 hours.</div>
+    <div class="callout blue"><b>The protein pairing rule:</b> Every time he grabs a snack-food item — Cheez-Its, granola bar, ice cream — something with 15g+ of protein goes with it. Fairlife shake, Kirkland milk, cottage cheese, or pistachios. Build this one habit and the whole plan runs itself.</div>
+  </div>
+</section>
+
+<!-- BREAKFAST -->
+<section id="breakfast">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--teal)"></div><h2 class="sec-title">Breakfast Rotation</h2></div>
+    <p>Breakfast is built entirely around what he already eats — shrimp and rice. Most athletes start the day with sugar-heavy cereal and bonk by mid-morning. He starts with 40–55g of protein and a full carb base, sustaining energy through classes and setting muscle protein synthesis running from the moment he wakes up. The rice cooker is the key tool: cook a full pot the night before. Breakfast becomes a 5-minute reheat, not a cooking project.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead style="background:var(--teal)"><tr><th>Option</th><th>Protein</th><th>Carbs</th><th>What's in it</th></tr></thead>
+        <tbody>
+          <tr><td>Shrimp + rice bowl (go-to)</td><td>~45g</td><td>~80g</td><td>8 oz shrimp in butter + garlic, 2 cups white rice, sliced cucumbers, 16 oz Kirkland milk, creatine 5g, honeycrisp apple or applesauce</td></tr>
+          <tr><td>Chipotle chicken + rice</td><td>~55g</td><td>~85g</td><td>8 oz chipotle-seasoned chicken, 2 cups white rice, sliced avocado, honeycrisp apple, 16 oz Kirkland milk</td></tr>
+          <tr><td>Shrimp + potato hash</td><td>~42g</td><td>~85g</td><td>6 oz shrimp, 2 cups diced potatoes pan-fried in butter, applesauce, 16 oz Kirkland milk, Ghost protein shake</td></tr>
+          <tr><td>Ground beef rice bowl</td><td>~58g</td><td>~80g</td><td>8 oz 90/10 ground beef with soy sauce + garlic, 2 cups white rice, cucumbers, 16 oz Kirkland milk</td></tr>
+          <tr><td>Chicken nuggets + rice</td><td>~38g</td><td>~90g</td><td>12–15 air-fried nuggets, 2 cups white rice, applesauce, Kirkland milk, Fairlife shake alongside to hit protein target</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout blue"><b>Prep tip:</b> Cook 4–6 cups of rice every Sunday and Wednesday. Keep it in the fridge. Breakfast goes from 15 minutes to 4 minutes and he is far more likely to eat it.</div>
+  </div>
+</section>
+
+<!-- LUNCH -->
+<section id="lunch">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--amber)"></div><h2 class="sec-title">Lunch Rotation</h2></div>
+    <p>Lunch is the mid-day anchor at ~950 calories and ~60g of protein. It needs to carry him through the afternoon and into training without feeling heavy. The rotation below covers three formats — rice bowls, wraps, and lunch meat plates — so he has variety without needing to think hard about what to eat. Kirkland milk is the constant at every lunch.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead style="background:var(--amber)"><tr><th>Meal</th><th>Format</th><th>Protein</th><th>What's in it</th></tr></thead>
+        <tbody>
+          <tr><td>Ground beef rice bowl</td><td>Rice bowl</td><td>~62g</td><td>8–10 oz 90/10 ground beef seasoned with soy sauce + garlic over 2.5 cups white rice. Sliced cucumbers or grapes. Kirkland milk.</td></tr>
+          <tr><td>Chipotle chicken rice bowl</td><td>Rice bowl</td><td>~58g</td><td>8 oz chipotle chicken over 2.5 cups white rice. Sliced avocado. Applesauce or grapes. Kirkland milk.</td></tr>
+          <tr><td>Shrimp rice bowl</td><td>Rice bowl</td><td>~50g</td><td>8 oz shrimp sauteed in butter + garlic over 2 cups white rice. Cucumbers on side. Kirkland milk. Add Fairlife shake if protein feels low.</td></tr>
+          <tr><td>Chicken + avocado wrap</td><td>Wrap</td><td>~52g</td><td>Large flour tortilla, 8 oz sliced chicken, avocado, cucumbers, honey mustard or hot sauce. 2 cups rice or chips. Kirkland milk.</td></tr>
+          <tr><td>Turkey lunch meat wrap</td><td>Wrap</td><td>~48g</td><td>Large flour tortilla, 8–10 slices turkey breast, avocado, grapes or apple slices. Pistachios on side. Kirkland milk. Add Fairlife to close gap.</td></tr>
+          <tr><td>Roast beef + chicken wrap</td><td>Wrap</td><td>~55g</td><td>Large flour tortilla, 5–6 slices roast beef + 4 oz chicken, avocado, cucumbers. Rice or chips. Kirkland milk.</td></tr>
+          <tr><td>Turkey + PB honey wrap</td><td>Wrap</td><td>~45g</td><td>Large flour tortilla, 6–8 slices turkey, peanut butter, honey drizzle. Apple slices inside or on side. Kirkland milk.</td></tr>
+          <tr><td>Lunch meat plate</td><td>Plate</td><td>~50g</td><td>8–10 slices mixed turkey and roast beef, avocado slices, grapes, apple slices, pistachios, applesauce. Kirkland milk. Zero cooking.</td></tr>
+          <tr><td>Chicken nuggets + rice</td><td>Rice bowl</td><td>~42g</td><td>12–15 air-fried nuggets over 2 cups white rice. Applesauce. Kirkland milk. Add Fairlife shake — nuggets are lighter on protein than other options.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout teal"><b>Wrap tips:</b> Large burrito-size flour tortillas are the best vehicle — they add 40–50g of carbs and hold enough filling to make a real meal. Warm the tortilla for 20 seconds in the microwave before loading so it doesn't crack. Avocado is the best add-in: healthy fat, no cooking, and it makes the wrap filling enough to carry him through the afternoon without feeling heavy. Wraps are also the easiest lunch to pack for school — make it the night before and refrigerate.</div>
+  </div>
+</section>
+
+<!-- DINNER -->
+<section id="dinner">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--blue)"></div><h2 class="sec-title">Dinner Rotation</h2></div>
+    <p>Dinner is the largest meal of the day at ~1,050 calories. It refuels glycogen stores depleted during afternoon training and provides the bulk of evening protein heading into overnight recovery. All eight dinners are under 15 minutes to make and built entirely from foods he already eats. Steak is added as a high-protein, high-creatine option — excellent for heavy lifting days. No meal should repeat more than twice a week.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead style="background:var(--blue)"><tr><th>Meal</th><th>Protein</th><th>Carbs</th><th>How to make it</th></tr></thead>
+        <tbody>
+          <tr><td>Chipotle chicken + rice + avocado</td><td>~55g</td><td>~120g</td><td>Season chicken with chipotle powder, garlic, cumin, salt. Pan-sear 8 min. Serve over 2–3 cups rice with sliced avocado and Kirkland milk.</td></tr>
+          <tr><td>Ground beef rice bowl</td><td>~60g</td><td>~115g</td><td>Brown 8–10 oz 90/10 beef, drain fat, season with soy sauce + garlic powder + salt. Serve over 2.5 cups rice. Kirkland milk alongside.</td></tr>
+          <tr><td>Sirloin steak + rice</td><td>~65g</td><td>~110g</td><td>Season 8–10 oz sirloin with salt, garlic powder, black pepper. Sear 3–4 min per side in a hot pan with butter. Rest 5 min, slice. Serve over 2 cups rice. Kirkland milk.</td></tr>
+          <tr><td>Steak + pan-fried potatoes</td><td>~62g</td><td>~120g</td><td>Same sirloin prep. While steak rests, pan-fry diced potatoes in the leftover butter + garlic until golden. Sliced avocado on the side. Kirkland milk.</td></tr>
+          <tr><td>Shrimp pasta</td><td>~50g</td><td>~130g</td><td>Saute 8–10 oz shrimp in 2 tbsp butter + garlic, 3–4 min. Toss with penne or spaghetti. Drizzle olive oil. Kirkland milk.</td></tr>
+          <tr><td>Ground beef pasta</td><td>~58g</td><td>~128g</td><td>Brown ground beef, mix with marinara or butter + garlic. Serve over spaghetti. Avocado slices on side. Kirkland milk.</td></tr>
+          <tr><td>Chicken nuggets + pasta or rice</td><td>~40g</td><td>~130g</td><td>Air-fry 12–15 nuggets at 400F for 10 min. Serve with large bowl of buttered pasta or rice. Applesauce. Kirkland milk. Add Fairlife shake to hit protein target.</td></tr>
+          <tr><td>Shrimp + pan-fried potatoes</td><td>~48g</td><td>~125g</td><td>Dice 2 cups potatoes, pan-fry in butter + garlic until golden (10–12 min). Saute shrimp 3–4 min. Plate together. Sliced avocado. Kirkland milk.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout blue"><b>Steak nights:</b> Sirloin is one of the densest natural protein sources available — 8 oz gives ~65g of protein and is loaded with zinc, iron, and creatine precursors that directly support muscle growth and oxygen transport. Best on heavy lifting days. Keep it simple: butter, garlic, salt, pepper. A cast iron pan works perfectly.</div>
+  </div>
+</section>
+
+<!-- SNACKS -->
+<section id="snacks">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--purple)"></div><h2 class="sec-title">Snack Drawer</h2></div>
+    <p>Snacks are structured eating occasions — not afterthoughts. They fill the gaps between main meals and keep protein flowing throughout the day. The one rule: any time a snack-food item is eaten, something with protein goes with it.</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="card-title">Grab-and-Go (Bag / Locker)</div>
+        <ul class="bullets">
+          <li><b>Fairlife shake</b> — 30g protein, ready to drink. Keep 2 in the bag daily.</li>
+          <li><b>Cheez-Its</b> — fast carbs pre-workout. Pair with Fairlife = complete meal.</li>
+          <li><b>Granola bars</b> — Clif pre-workout, Kind mid-day.</li>
+          <li><b>Applesauce pouches</b> — fastest carb. Best immediately before training.</li>
+          <li><b>Pistachios</b> — 6g protein + fat. Keeps hunger off 2+ hours.</li>
+          <li><b>Grapes / apple slices</b> — natural sugar, portable, easy to bag.</li>
+          <li><b>String cheese</b> — 7–8g protein per stick, pairs with anything.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">At-Home Snacks</div>
+        <ul class="bullets">
+          <li>Apple + peanut butter + honey — ~280 kcal, great pre-bed on light days</li>
+          <li>Avocado on rice cakes — healthy fat + complex carb</li>
+          <li>Cheez-Its + cottage cheese — carbs + 25g protein</li>
+          <li>Cereal + Kirkland milk — ~40g protein disguised as a snack</li>
+          <li>Pistachios + grapes — portable fat and sugar</li>
+          <li>PB + honey on toast — 280+ calories, fast carbs</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Dessert — The Right Way</div>
+        <p>Two scoops of ice cream at 8:30pm is completely fine at his activity level. Always pair with cottage cheese or Greek yogurt. The dairy protein slows digestion, blunts the sugar spike, and keeps amino acids available heading into the overnight recovery window.</p>
+        <div class="callout purple" style="margin-top:0.7rem"><b>Pairing rule:</b> Cheez-Its + Fairlife. Ice cream + cottage cheese. Granola bar + string cheese. Oreos + Kirkland milk.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOODS -->
+<section id="foods">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--navy2);border:1px solid var(--teal)"></div><h2 class="sec-title">What Every Food Does For Him</h2></div>
+    <p>Every food in this plan was chosen because it fits his preferences AND serves a specific performance function. Understanding why each food is here makes the choices automatic rather than forced.</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead style="background:var(--navy2)"><tr><th>Food</th><th>What it does</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Shrimp</td><td>~45g protein per 8 oz, very low fat</td><td>Best protein-per-calorie food in the plan. Cooks in 3–4 min. Ideal on weigh-in days when fat should be lower.</td></tr>
+          <tr><td>Ground beef 90/10</td><td>~55g protein per 8 oz, moderate fat</td><td>Most calorie-dense meal he makes. Iron supports oxygen transport for cross country. Best dinner anchor.</td></tr>
+          <tr><td>Sirloin steak</td><td>~65g protein per 8–10 oz</td><td>Highest protein dinner option. Rich in zinc, iron, and creatine precursors. Best on heavy lifting days. Butter, garlic, salt, pepper — 3–4 min per side.</td></tr>
+          <tr><td>Chicken / chipotle chicken</td><td>~50g protein per 8 oz</td><td>Lean and versatile. Chipotle seasoning adds variety that prevents burnout on plain chicken.</td></tr>
+          <tr><td>Chicken nuggets</td><td>~24g protein per 12 pieces</td><td>Real chicken protein. Air-fry for best result. Eat 12–15; always pair with Kirkland milk.</td></tr>
+          <tr><td>Turkey breast (lunch meat)</td><td>~10–11g per 2 slices</td><td>Stack 6–8 slices to hit meaningful protein. Very lean. Best lunch meat for daily use.</td></tr>
+          <tr><td>Roast beef (lunch meat)</td><td>~10g per 2 slices, higher iron</td><td>Higher in iron and zinc than turkey. Best combined with turkey in a wrap for variety.</td></tr>
+          <tr><td>White rice</td><td>~45g carbs per cup, easy digestion</td><td>Fast-digesting carb. Better than brown rice post-workout — absorbs faster to replenish glycogen.</td></tr>
+          <tr><td>Pasta</td><td>~43g carbs + 8g protein per 2 cups</td><td>Slower-digesting than rice — sustains energy through the evening and into overnight recovery.</td></tr>
+          <tr><td>Flour tortilla (large)</td><td>~40–50g carbs per wrap</td><td>Excellent lunch vehicle. Warm 20 sec before loading so it doesn't crack.</td></tr>
+          <tr><td>Potatoes</td><td>~30g carbs per cup, potassium-rich</td><td>One of the best natural potassium sources. Prevents muscle cramps on multi-session days.</td></tr>
+          <tr><td>Avocado</td><td>~320 kcal, 20g healthy fat per whole</td><td>Supports testosterone production, joint health, and inflammation control. Anti-inflammatory at this training volume.</td></tr>
+          <tr><td>Kirkland protein milk</td><td>~13g protein per cup (vs 8g standard)</td><td>Effortless protein upgrade. 16 oz = ~26g protein. Replacing regular milk adds 15–20g daily with zero effort.</td></tr>
+          <tr><td>Ghost protein</td><td>~25g protein per scoop</td><td>Best used at night mixed with Kirkland milk (~51g combined). Fills the overnight recovery window.</td></tr>
+          <tr><td>Fairlife shake</td><td>~30g protein, ready to drink</td><td>Most important carry item. Prevents missed protein windows. Fairlife + Cheez-Its = complete meal in 90 seconds.</td></tr>
+          <tr><td>Pistachios</td><td>6g protein + 14g fat per oz</td><td>Highest-protein nut option. Fat slows digestion and keeps hunger off 2+ hours.</td></tr>
+          <tr><td>PB + honey</td><td>~8g protein + fat + fast carbs</td><td>Honey = fast glucose; PB = fat and protein. Best on apple slices or toast as a calorie booster.</td></tr>
+          <tr><td>Honeycrisp apple</td><td>~25g carbs, fiber, vitamin C</td><td>Vitamin C pairs with collagen supplementation. Natural sugar gives pre-workout energy without crashing.</td></tr>
+          <tr><td>Applesauce</td><td>~25g carbs, very easy digestion</td><td>Fastest-absorbing carb. Best immediately before training or as vitamin C source with collagen.</td></tr>
+          <tr><td>Grapes</td><td>~27g carbs per cup, portable</td><td>High water content helps hydration. Fast carbs for pre-workout windows.</td></tr>
+          <tr><td>Cucumbers</td><td>Hydration, micronutrients, low cal</td><td>96% water — actively supports hydration. Good volume food that adds satiety without heavy calories.</td></tr>
+          <tr><td>Cheez-Its</td><td>Fast carbs, some fat</td><td>Pre-workout window food. Easy on the stomach. Pair with Fairlife = complete 350-calorie meal.</td></tr>
+          <tr><td>Granola bars</td><td>30–45g carbs, 5–10g protein</td><td>Clif = higher carb (pre-workout). Kind = more fat+protein (better mid-day).</td></tr>
+          <tr><td>Ice cream</td><td>~300 kcal per 2 scoops</td><td>Calories + enjoyment. Always pair with cottage cheese or Greek yogurt to buffer the sugar.</td></tr>
+          <tr><td>Cottage cheese</td><td>~25g protein per cup, mostly casein</td><td>One of the best pre-bed protein foods. Casein digests slowly — amino acids available all night.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout blue"><b>Lunch meat guide:</b> Turkey breast and roast beef are the two best choices — deli-sliced is always better than pre-packaged. Turkey is very lean with ~10–11g of protein per 2 slices; stack 6–8 slices to hit meaningful numbers. Roast beef adds more iron and zinc. Ham and salami are lower priority — higher sodium and fat, lower protein density.</div>
+  </div>
+</section>
+
+<!-- HYDRATION -->
+<section id="hydration">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--teal)"></div><h2 class="sec-title">Hydration</h2></div>
+    <p>Hydration is the most underestimated performance variable in this plan. Dehydration of just 2% of body weight produces measurable drops in strength, reaction time, and endurance. At 200 lbs, that is only 4 pounds of water — easy to lose in a single hard practice. By the time he feels thirsty, he is already behind.</p>
+    <div class="hyd-bars">
+      <div class="hyd-row">
+        <div class="hyd-label"><span>Single session (1 workout)</span><span style="color:var(--teal)">1 gallon (~128 oz)</span></div>
+        <div class="hyd-track"><div class="hyd-fill" style="width:60%;background:var(--teal)"></div></div>
+      </div>
+      <div class="hyd-row">
+        <div class="hyd-label"><span>2-a-day (2 workouts)</span><span style="color:var(--amber)">1.25–1.5 gallons (~160–192 oz)</span></div>
+        <div class="hyd-track"><div class="hyd-fill" style="width:78%;background:var(--amber)"></div></div>
+      </div>
+      <div class="hyd-row">
+        <div class="hyd-label"><span>3-a-day (camps, pre-season)</span><span style="color:var(--red)">1.5–2 gallons (~192–256 oz)</span></div>
+        <div class="hyd-track"><div class="hyd-fill" style="width:100%;background:var(--red)"></div></div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead style="background:var(--teal)"><tr><th>Day type</th><th>Water target</th><th>Electrolytes?</th><th>Key strategy</th></tr></thead>
+        <tbody>
+          <tr><td>Single session</td><td>1 gallon</td><td>Optional</td><td>16 oz on waking. Sip steadily all day. 20–24 oz during workout. Kirkland milk counts. Urine pale yellow by afternoon.</td></tr>
+          <tr><td>2-a-day</td><td>1.25–1.5 gal</td><td>Required between sessions</td><td>Front-load before session 1. 20–24 oz per workout. Gatorade or Liquid IV between sessions — plain water dilutes blood sodium, causing cramps.</td></tr>
+          <tr><td>3-a-day (camps)</td><td>1.5–2 gallons</td><td>Mandatory every session</td><td>Electrolytes WITH every session. Sodium, potassium, and magnesium all deplete. Watch for cramping, headache, unusual fatigue. Never rely on thirst alone.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout red"><b>Weight rule:</b> Never cut water weight as a regular strategy at 15. Dehydration for weigh-ins affects cognitive function, reaction time, and hormonal balance — all of which hurt performance in the match he just cut for. If weight needs to drop, do it slowly through food choices over weeks.</div>
+  </div>
+</section>
+
+<!-- SLEEP -->
+<section id="sleep">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--purple)"></div><h2 class="sec-title">Sleep</h2></div>
+    <p>Sleep is where the plan actually works. Human growth hormone — the primary signal for muscle growth and tissue repair — releases in its largest pulse during the first two hours of deep sleep. Staying up until midnight cuts off his own peak recovery window. At 15, sleep also drives height, bone density, and joint development — it cannot be made up later.</p>
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin:1.2rem 0;">
+      <div class="kpi" style="border-top-color:var(--purple)"><div class="kpi-val">9–10 hrs</div><div class="kpi-lbl">Minimum nightly</div></div>
+      <div class="kpi" style="border-top-color:var(--teal)"><div class="kpi-val">9:30 PM</div><div class="kpi-lbl">Target bedtime</div></div>
+      <div class="kpi" style="border-top-color:var(--amber)"><div class="kpi-val">30 min</div><div class="kpi-lbl">Screen cutoff</div></div>
+      <div class="kpi" style="border-top-color:var(--blue)"><div class="kpi-val">65–68°F</div><div class="kpi-lbl">Room temp</div></div>
+    </div>
+    <div class="sleep-strip">
+      <div class="sleep-phase" style="width:40%;background:var(--purple)">Deep Sleep<br>Hours 1–4</div>
+      <div class="sleep-phase" style="width:25%;background:var(--blue)">REM<br>Hours 4–6</div>
+      <div class="sleep-phase" style="width:35%;background:var(--teal)">Late REM<br>Hours 7–10</div>
+    </div>
+    <div class="sleep-legend">
+      <div class="sleep-leg"><div class="sleep-dot" style="background:var(--purple)"></div>Deep sleep — HGH release, muscle repair, creatine &amp; collagen do their work</div>
+      <div class="sleep-leg"><div class="sleep-dot" style="background:var(--blue)"></div>REM — technique consolidation, reaction time, movement coordination</div>
+      <div class="sleep-leg"><div class="sleep-dot" style="background:var(--teal)"></div>Late REM — injury prevention, coordination gains, elite recovery window</div>
+    </div>
+    <div class="sec-sub">Sleep Quality Checklist</div>
+    <ul class="bullets">
+      <li><b>Bedtime:</b> In bed by 9:30–10:00 PM on school nights. 9:30 PM with a 6:30 AM wake-up = 9 hours minimum.</li>
+      <li><b>Screen cutoff:</b> Phone down 30–45 min before bed. Blue light delays melatonin by up to 90 minutes.</li>
+      <li><b>Room temperature:</b> 65–68°F is the optimal range for deep sleep. A fan helps — most athletes sleep hot.</li>
+      <li><b>Nighttime shake:</b> Ghost + Kirkland milk 30–45 min before bed. Protein synthesis runs overnight — this is the fuel for it.</li>
+      <li><b>Naps on multi-session days:</b> 20–30 min between sessions is legitimate recovery. Set an alarm — stay under 30 min.</li>
+      <li><b>Weekends:</b> No sleeping past 10:00 AM. An extra hour is fine; four extra hours wrecks Monday and cascades all week.</li>
+    </ul>
+    <div class="callout amber"><b>The non-negotiable:</b> Supplements, protein, and training all depend on sleep to work. No amount of Ghost protein or creatine compensates for chronically short sleep. And at 15, cutting sleep competes with development that cannot be recovered later.</div>
+  </div>
+</section>
+
+<!-- SUPPLEMENTS -->
+<section id="supplements">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--blue)"></div><h2 class="sec-title">Supplement Stack</h2></div>
+    <p>His current stack is well-chosen for his goals. Every item serves a specific purpose with meaningful research behind it for athletes carrying high-volume, multi-sport, in-season training combined with strength development.</p>
+    <div class="supp-list">
+      <div class="supp-row">
+        <div class="supp-name">Creatine monohydrate</div>
+        <div class="supp-dose">5g daily</div>
+        <div class="supp-when">Every morning in Kirkland milk</div>
+        <div class="supp-why">Increases phosphocreatine stores in muscle, which regenerates ATP faster during explosive efforts. Directly improves power output in wrestling takedowns, lifting maxes, and sprint starts. Reduces recovery time between high-intensity efforts. Consistency is more important than timing. Expect 2–4 lbs water weight gain in week 1 — creatine draws water into muscle cells, which is a good sign.</div>
+      </div>
+      <div class="supp-row">
+        <div class="supp-name">Collagen</div>
+        <div class="supp-dose">10–15g</div>
+        <div class="supp-when">30–60 min pre-workout + vitamin C</div>
+        <div class="supp-why">Collagen synthesis in tendons, ligaments, and cartilage peaks in the 1-hour window before mechanical loading. Taking it before practice means building blocks are circulating when joints need them. At his training volume — wrestling + cross country + heavy lifting — connective tissue health is the limiting factor. Vitamin C (OJ or applesauce) is required for the synthesis to occur.</div>
+      </div>
+      <div class="supp-row">
+        <div class="supp-name">Ghost protein</div>
+        <div class="supp-dose">1 scoop (~25g)</div>
+        <div class="supp-when">Before bed in Kirkland milk</div>
+        <div class="supp-why">Delivers ~51g of combined protein heading into the overnight repair window. Whey from Ghost is fast-digesting; the casein in Kirkland milk is slow-digesting, meaning amino acids are available throughout the night. On brutal training days, add 1 cup cottage cheese alongside for additional casein.</div>
+      </div>
+      <div class="supp-row">
+        <div class="supp-name">Fairlife shake</div>
+        <div class="supp-dose">30g protein/bottle</div>
+        <div class="supp-when">Mid-morning or post-workout</div>
+        <div class="supp-why">Convenience protein that prevents missed windows. The most important meal is the one he would otherwise skip. Fairlife + Cheez-Its = complete 350-calorie window meal in 90 seconds with zero prep. Keep 2 in his bag every single day.</div>
+      </div>
+    </div>
+    <div class="callout blue"><b>Daily timing summary:</b> Creatine at breakfast. Collagen + vitamin C 30–60 min pre-workout. Fairlife shake mid-morning or post-workout. Ghost + Kirkland milk before bed. These four things at the right times compound every training adaptation.</div>
+  </div>
+</section>
+
+<!-- CAMP GUIDE -->
+<section id="camp">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--red)"></div><h2 class="sec-title">Camp &amp; Multi-Session Day Guide</h2></div>
+    <p>Wrestling camps, pre-season intensives, and any day with three or more training sessions are the highest-demand situations in this plan. Nutrition and hydration failures on these days create a recovery debt that affects the next 2–3 days of training. Preparation starts the night before.</p>
+
+    <div class="sec-sub">What to Pack — Camp Bag Essentials</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead style="background:var(--red)"><tr><th>Item</th><th>Qty/day</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Fairlife protein shake</td><td>2–3</td><td>No refrigeration needed for hours. Complete protein between sessions. Non-negotiable.</td></tr>
+          <tr><td>Cheez-Its (individual sleeves)</td><td>2–3</td><td>Fast carbs, easy on stomach. Pair with Fairlife for a complete window meal.</td></tr>
+          <tr><td>Granola bars (Clif + Kind)</td><td>2–3</td><td>Clif pre-session (carbs), Kind mid-day (fat + protein).</td></tr>
+          <tr><td>Applesauce pouches</td><td>2–3</td><td>Fastest carb available. Pair with collagen for vitamin C pre-session.</td></tr>
+          <tr><td>Pistachios (1 oz bags)</td><td>2</td><td>Protein + fat for sustained energy between sessions.</td></tr>
+          <tr><td>Electrolyte packets (Liquid IV)</td><td>2–3</td><td>One per session on 3-a-day days. Not optional.</td></tr>
+          <tr><td>Gatorade or sports drink (32 oz)</td><td>1–2</td><td>Keep one active during every session — not just between them.</td></tr>
+          <tr><td>Peanut butter packets (single-serve)</td><td>2</td><td>Emergency calorie source if food access is limited.</td></tr>
+          <tr><td>Grapes or apple (zip bag)</td><td>1–2</td><td>Natural sugar + hydration support. Easy to eat fast.</td></tr>
+          <tr><td>Kirkland protein milk (if refrigeration available)</td><td>2–3</td><td>Bring cartons. If no fridge, substitute extra Fairlife shakes.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sec-sub">Camp Day Schedule</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead style="background:var(--red)"><tr><th>Time</th><th>What to eat/drink</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Wake up</td><td>16–24 oz water + creatine 5g</td><td>Rehydrate after overnight fast before any activity begins.</td></tr>
+          <tr><td>Pre-session 1 (30–60 min before)</td><td>Collagen + OJ/applesauce, granola bar, 16–24 oz water</td><td>Connective tissue prep + fast carb fuel. Do not train fasted at camp.</td></tr>
+          <tr><td>During session 1</td><td>20–24 oz water or Gatorade — sip continuously</td><td>Maintain hydration during output. Do not wait until thirsty.</td></tr>
+          <tr><td>Between sessions 1 &amp; 2</td><td>Fairlife shake + Cheez-Its + electrolyte packet + 24 oz water</td><td>~350 kcal, 30g protein, fast carbs, electrolyte repletion. This window determines session 2 performance.</td></tr>
+          <tr><td>Pre-session 2 (if time allows)</td><td>Applesauce or grapes + 16 oz water</td><td>Top up fast carbs. Keep it light — too heavy and he will feel it.</td></tr>
+          <tr><td>During session 2</td><td>20–24 oz Gatorade or water + electrolytes</td><td>Electrolytes are mandatory by session 2. Sodium and potassium are depleted.</td></tr>
+          <tr><td>Between sessions 2 &amp; 3</td><td>Fairlife + pistachios + grapes + electrolyte packet + 24 oz water. If a real meal is available: rice or pasta + protein + Kirkland milk.</td><td>Full protein + fat + carb combo. Real meal beats shakes if there is time.</td></tr>
+          <tr><td>During session 3</td><td>Gatorade or electrolyte drink — water alone insufficient</td><td>By session 3, plain water is not enough. All three electrolytes are low.</td></tr>
+          <tr><td>Post-camp</td><td>Real meal ASAP: shrimp/beef/chicken/steak + rice or pasta + Kirkland milk + avocado</td><td>Full refuel sets up recovery for the next day.</td></tr>
+          <tr><td>Before bed</td><td>Ghost + Kirkland milk (or 2 Fairlife shakes if no mixing access)</td><td>~51g protein into the overnight window. Non-negotiable after a 3-session day.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout red"><b>Most important camp rule:</b> Never go into session 2 or 3 without eating something and drinking electrolytes between sessions. The body is in deficit by then — training on empty at that point is training for injury, not improvement.</div>
+
+    <div class="sec-sub">90-Minute Lunch Break — Drilling Session Ahead</div>
+    <div class="tbl-wrap">
+      <table>
+        <thead style="background:var(--purple)"><tr><th>Phase</th><th>What to eat/drink</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>First 15 min (right after session ends)</td><td>16–24 oz water or Gatorade + electrolyte packet immediately</td><td>Rehydrate before eating anything. Depleted electrolytes blunt digestion — replenish first.</td></tr>
+          <tr><td>Minutes 15–30 (recovery window)</td><td>Fairlife shake + Cheez-Its or granola bar</td><td>~350 kcal, 30g protein, fast carbs. Gets protein synthesis started and tops up glycogen without sitting heavy.</td></tr>
+          <tr><td>Minutes 30–60 (real meal if available)</td><td>Rice or pasta + chicken, ground beef, or shrimp + Kirkland milk. Wrap with turkey or roast beef if no hot food.</td><td>Most important eating window of the day at camp. A real meal here — 600–800 kcal, 40–50g protein — sets up the drilling session and everything after it. Eat slowly, chew well.</td></tr>
+          <tr><td>Minutes 60–75 (wind down)</td><td>Applesauce or grapes + 16 oz water</td><td>Fast carbs top up blood glucose heading into drilling. Light enough that it won't cause cramps.</td></tr>
+          <tr><td>Minutes 75–90 (pre-drilling prep)</td><td>Collagen 10–15g + small OJ or applesauce. Sip remaining water.</td><td>Drilling is repetitive joint-loading — collagen before it protects tendons and ligaments.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout purple"><b>Drilling vs live wrestling:</b> Drilling is lower intensity but high repetition and technically demanding — CNS fatigue is real even if breathing stays easy. The goal for the lunch break is not maximum calories; it is restoring glycogen, getting protein in, and keeping joints supported. Overeating causes sluggish movement. Formula: real meal early, light fast carbs last 15 minutes, collagen right before drilling.</div>
+
+    <div class="sec-sub">Signs He Is Under-Fueled at Camp</div>
+    <ul class="bullets">
+      <li><b>Cramping during session 2 or 3</b> — electrolyte depletion, not just fatigue. Drink electrolytes immediately.</li>
+      <li><b>Headache between sessions</b> — dehydration signal. Add electrolytes, not just water.</li>
+      <li><b>Unusual irritability or inability to focus</b> — blood sugar crash. Needs fast carbs now (applesauce, Cheez-Its, Gatorade).</li>
+      <li><b>Technique breaking down in later sessions</b> — CNS fatigue from inadequate fuel, not physical weakness.</li>
+      <li><b>Extreme soreness the day after camp</b> — nutrition during camp directly determines recovery speed.</li>
+    </ul>
+    <div class="callout teal"><b>The night before camp:</b> Large dinner of pasta or rice + protein + Kirkland milk. Full hydration (pale yellow urine by 8 PM). Ghost + Kirkland milk before bed. Pack the bag the night before. Do not show up to a 3-session day underprepared — the body will not bail him out.</div>
+  </div>
+</section>
+
+<!-- APPETITE -->
+<section id="appetite">
+  <div class="container">
+    <div class="sec-header"><div class="sec-bar" style="background:var(--teal)"></div><h2 class="sec-title">Appetite, Hunger &amp; Training the Stomach</h2></div>
+    <p>One of the most common — and least talked about — challenges for a high-volume athlete is not knowing what to eat or how much. It is simply not feeling hungry enough to eat what the body actually needs. This is normal. It is also fixable. Understanding why it happens makes it far easier to push through.</p>
+
+    <div class="sec-sub">Why Appetite Disappears After Hard Training</div>
+    <p>Hard exercise — especially high-intensity wrestling and lifting — suppresses appetite through a direct hormonal mechanism. Exercise triggers the release of peptide YY and GLP-1, both of which signal fullness and suppress hunger. The harder the session, the stronger the suppression, and it can last 1–2 hours after training ends. This means the times he most needs to eat are often the exact times he least wants to. The need for fuel is still there — the hunger signal just gets delayed.</p>
+
+    <div class="sec-sub">Why the Stomach Needs to Be Trained</div>
+    <p>4,100 calories a day is a significant volume of food — more than most adults eat, and substantially more than his body has been used to. The stomach is a muscle. It stretches and adapts over time, but jumping straight to the full plan will cause discomfort: bloating, feeling uncomfortably full mid-meal, or even mild nausea. None of that means something is wrong. This adaptation takes <b>3–6 weeks</b> of consistent higher-volume eating. After that window, most athletes find their appetite catches up and they actually start feeling hungry at meal times.</p>
+
+    <div class="sec-sub">How to Build Up Without Forcing It</div>
+    <p>Start at the current comfort level and add one meal or snack per week rather than trying to hit 4,100 calories from day one. The nighttime shake and the mid-morning snack are the easiest first additions — they don't require sitting down to a big plate of food. Add those first, get comfortable for a week, then add the next thing.</p>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead style="background:var(--teal)"><tr><th>Situation</th><th>What to do</th><th>Why it works</th></tr></thead>
+        <tbody>
+          <tr><td>Appetite is low after practice</td><td>Fairlife shake + Kirkland milk + handful of pistachios</td><td>~350 kcal, 55g protein, requires almost no effort. Liquid calories bypass the fullness signal better than solid food when appetite is suppressed.</td></tr>
+          <tr><td>Stomach feels full but calories are short</td><td>Shift to calorie-dense foods: PB, avocado, Kirkland milk, pistachios</td><td>These pack significant calories into small portions. A tablespoon of PB + glass of Kirkland milk = 250 calories with almost no volume.</td></tr>
+          <tr><td>Does not want a full meal</td><td>Split the meal — eat half now, other half 30–45 min later</td><td>Smaller portions are easier on a suppressed stomach. Two half-meals still hit the same calorie target without the discomfort of forcing a large plate.</td></tr>
+          <tr><td>Skipping a window because not hungry</td><td>Set phone alarms for each meal window and eat on schedule regardless</td><td>Hunger is an unreliable signal at this training volume. Eating on a schedule trains the body to anticipate meals — hunger signals start arriving on time within 3–4 weeks.</td></tr>
+          <tr><td>Feels nauseous trying to eat this much</td><td>Back off volume for 3–5 days, then rebuild slowly</td><td>The stomach is adapting — it just needs more time. Forcing through nausea makes the aversion worse. Retreat slightly, stabilize, then build again.</td></tr>
+          <tr><td>Hard day, nothing sounds appealing</td><td>Minimum viable meal: Fairlife shake + Cheez-Its + applesauce</td><td>~400 kcal, 35g protein, 3 minutes. Something always beats nothing. One missed window doesn't derail the plan; consistently missed windows do.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sec-sub">The 4–6 Week Turning Point</div>
+    <p>Most athletes who commit to eating on schedule — even when they don't feel like it — report a clear turning point around weeks 4–6 where appetite shifts. Instead of forcing food, they start feeling genuinely hungry at the right times. Energy levels stabilize, performance in later sessions improves, and recovery feels noticeably faster. That turning point is the stomach catching up. Everything before it is just building the habit consistently enough that the body has time to adapt.</p>
+
+    <div class="callout teal"><b>The one rule for low-appetite days:</b> Something always beats nothing. A Fairlife shake and a handful of Cheez-Its after practice beats skipping the window entirely — every single time. Do not let the perfect meal be the enemy of the easy meal. The body does not care whether the protein came from a perfectly balanced plate or a shake in the car. It just needs the fuel.</div>
+    <div class="callout amber"><b>What not to do:</b> Do not try to make up missed calories all at once by eating a massive meal later. The stomach cannot absorb protein effectively above a certain rate per sitting, and a 1,500-calorie dinner after a skipped lunch does not achieve the same effect as two properly spaced 700-calorie meals. Consistency across the day always beats catch-up eating.</div>
+  </div>
+</section>
+
+<footer>
+  <strong>Athlete Nutrition &amp; Recovery Plan</strong> &nbsp;&middot;&nbsp; Performance Nutrition Guide &nbsp;&middot;&nbsp; June 2026<br>
+  <span style="opacity:0.6;margin-top:0.4rem;display:block;">Wrestle hard. Eat right. Sleep more.</span>
+</footer>
+
+</body>
+</html>
